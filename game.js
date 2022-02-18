@@ -1,23 +1,33 @@
-// to create colors
+
 var buttonColours = ["red", "blue", "green", "yellow"];
 
 // to store game pattern
 var gamePattern = [];
 
-//To create a sequence from 1 to 3
+//3. At the top of the game.js file, create a new empty array with the name userClickedPattern.
+var userClickedPattern = [];
+
+//1. Use jQuery to detect when any of the buttons are clicked and trigger a handler function.
+$(".btn").click(function() {
+
+  //2. Inside the handler, create a new variable called userChosenColour to store the id of the button that got clicked.
+  var userChosenColour = $(this).attr("id");
+
+  //4. Add the contents of the variable userChosenColour created in step 2 to the end of this new userClickedPattern
+  userClickedPattern.push(userChosenColour);
+
+  //console.log(userClickedPattern);
+
+});
+
 function nextSequence() {
+
   var randomNumber = Math.floor(Math.random() * 4);
-
-  randomChosenColour = buttonColours[randomNumber];
-
-  // to add the random color in game pattern
+  var randomChosenColour = buttonColours[randomNumber];
   gamePattern.push(randomChosenColour);
-  $("#" + randomChosenColour)
-    .fadeIn(100)
-    .fadeOut(100)
-    .fadeIn(100);
-  // to add audio to the chosen color
-  var audio = new Audio("sounds/" + randomChosenColour + "mp3");
+
+  $("#" + randomChosenColour).fadeIn(100).fadeOut(100).fadeIn(100);
+
+  var audio = new Audio( randomChosenColour + ".mp3");
   audio.play();
 }
-nextSequence();
